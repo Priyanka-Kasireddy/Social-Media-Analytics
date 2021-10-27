@@ -25,7 +25,8 @@ Parameters: str
 Returns: dataframe
 '''
 def makeDataFrame(filename):
-    return
+    political_df=pd.read_csv(filename)
+    return political_df
 
 
 '''
@@ -35,7 +36,13 @@ Parameters: str
 Returns: str
 '''
 def parseName(fromString):
-    return
+    for line in fromString.split("\n"):
+        start=line.find(" ")
+        line=line[start:]
+        end=line.find("(")
+        line=line[:end]
+        line=line.strip()
+    return line
 
 
 '''
@@ -45,7 +52,13 @@ Parameters: str
 Returns: str
 '''
 def parsePosition(fromString):
-    return
+    for line in fromString.split("\n"):
+        start=line.find("(")+len("(")
+        line=line[start:]
+        end=line.find(" ")
+        line=line[:end].strip()
+    return line
+    
 
 
 '''
@@ -55,7 +68,12 @@ Parameters: str
 Returns: str
 '''
 def parseState(fromString):
-    return
+    for line in fromString.split("\n"):
+        start=line.find("from")+len("from ")
+        line=line[start:]
+        end=line.find(")")
+        line=line[:end].strip()
+    return line
 
 
 '''
@@ -65,7 +83,21 @@ Parameters: str
 Returns: list of strs
 '''
 def findHashtags(message):
-    return
+    lst=[]
+    m=message.split("#")
+    # print(m)
+    for x in m[1:len(m)]:
+        string=""
+        # print(x)
+        for y in x:
+            if y not in endChars:
+                string+=y
+                # print(y)
+            else:
+                break
+        string="#"+string
+        lst.append(string)
+    return lst 
 
 
 '''
@@ -262,10 +294,15 @@ def scatterPlot(xValues, yValues, labels, title):
 
 # This code runs the test cases to check your work
 if __name__ == "__main__":
-    print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
-    test.week1Tests()
-    print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
-    test.runWeek1()
+    # print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
+    # test.week1Tests()
+    # print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
+    # test.runWeek1()
+    # test.testMakeDataFrame()
+    # test.testParseName()
+    # test.testParsePosition()
+    # test.testParseState()
+    test.testFindHashtags()
 
     ## Uncomment these for Week 2 ##
     """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
