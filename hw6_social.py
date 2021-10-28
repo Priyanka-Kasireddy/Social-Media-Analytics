@@ -283,6 +283,17 @@ Returns: None
 '''
 def graphStateCounts(stateCounts, title):
     import matplotlib.pyplot as plt
+    xlist=[i for i in stateCounts]
+    w=0.8
+    ylist=[stateCounts[i] for i in stateCounts]
+    for index in range(len(ylist)):
+        plt.bar(xlist[index],ylist[index],width=w)
+    plt.xticks(ticks=list(range(len(xlist))),label=xlist,rotation="vertical")
+    plt.title("StateCount")
+    plt.xlabel("State")
+    plt.ylabel("Count")
+ 
+    plt.show()
     return
 
 
