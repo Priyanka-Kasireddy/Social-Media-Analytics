@@ -108,7 +108,7 @@ Returns: str
 '''
 def getRegionFromState(stateDf, state):
     row=stateDf.loc[stateDf["state"]==state,"region"]
-    print(stateDf)
+    # print(stateDf)
     return row.values[0]
 
 
@@ -187,8 +187,18 @@ Parameters: dataframe ; str ; str
 Returns: dict mapping strs to ints
 '''
 def getDataCountByState(data, colName, dataToCount):
-    return
-
+    dictionary={}
+    for i, row in data.iterrows():
+        if ((len(colName)==0) and (len(dataToCount)==0) or (row[colName]==dataToCount)):
+                state=row["state"]
+                if state not in dictionary:
+                    dictionary[state] = 0
+                dictionary[state] += 1
+    return dictionary
+df = makeDataFrame("data/politicaldata.csv")
+stateDf = makeDataFrame("data/statemappings.csv")
+addColumns(df, stateDf)
+addSentimentColumn(df)
 
 '''
 getDataForRegion(data, colName)
@@ -334,7 +344,7 @@ if __name__ == "__main__":
     # test.week1Tests()
     # print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
     # test.runWeek1()
-    test.testAddSentimentColumn()
+    test.testGetDataCountByState(df)
 
     ## Uncomment these for Week 2 ##
     # """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
