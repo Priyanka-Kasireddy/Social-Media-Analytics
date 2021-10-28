@@ -195,10 +195,10 @@ def getDataCountByState(data, colName, dataToCount):
                     dictionary[state] = 0
                 dictionary[state] += 1
     return dictionary
-df = makeDataFrame("data/politicaldata.csv")
-stateDf = makeDataFrame("data/statemappings.csv")
-addColumns(df, stateDf)
-addSentimentColumn(df)
+# df = makeDataFrame("data/politicaldata.csv")
+# stateDf = makeDataFrame("data/statemappings.csv")
+# addColumns(df, stateDf)
+# addSentimentColumn(df)
 
 '''
 getDataForRegion(data, colName)
@@ -381,14 +381,18 @@ if __name__ == "__main__":
     # test.testGetDataForRegion(df)
     # test.testGetHashtagRates(df)
     # test.testMostCommonHashtags(df)
-    test.testGetHashtagSentiment(df)
+    # test.testGetHashtagSentiment(df)
+    df = makeDataFrame("data/politicaldata.csv")
+    stateDf = makeDataFrame("data/statemappings.csv")
+    addColumns(df, stateDf)
+    addSentimentColumn(df)
     
     ## Uncomment these for Week 2 ##
-    # """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
+    # print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
     # test.week2Tests()
     # print("\n" + "#"*15 + " WEEK 2 OUTPUT " + "#" * 15 + "\n")
-    # test.runWeek2()"""
+    # test.runWeek2()
 
     # ## Uncomment these for Week 3 ##
-    # """print("\n" + "#"*15 + " WEEK 3 OUTPUT " + "#" * 15 + "\n")
-    # test.runWeek3()"""
+    print("\n" + "#"*15 + " WEEK 3 OUTPUT " + "#" * 15 + "\n")
+    test.runWeek3()
