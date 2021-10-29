@@ -336,6 +336,7 @@ def graphRegionComparison(regionDicts, title):
         regionvalue.append(templist)
         regionlist.append(i)
     sideBySideBarPlots(featurelist,regionlist,regionvalue,title)
+
     return
 
 
