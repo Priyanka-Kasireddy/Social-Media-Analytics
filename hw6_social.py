@@ -227,7 +227,14 @@ Parameters: dataframe
 Returns: dict mapping strs to ints
 '''
 def getHashtagRates(data):
-    return
+    dictionary1={} 
+    for i in data["hashtags"]: 
+        for j in i: 
+            if len(j)!=0 and j not in dictionary1: 
+                dictionary1[j]=1 
+            else: 
+                dictionary1[j]+=1 
+    return dictionary1
 
 
 '''
@@ -355,7 +362,9 @@ if __name__ == "__main__":
     # print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
     # test.runWeek1()
     # test.testGetDataCountByState()
-    test.testGetDataForRegion(df)
+    # test.testGetDataForRegion(df)
+    test.testGetHashtagRates(df)
+
 
     ## Uncomment these for Week 2 ##
     # """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
