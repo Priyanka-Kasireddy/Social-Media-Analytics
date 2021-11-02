@@ -109,7 +109,7 @@ Returns: str
 '''
 def getRegionFromState(stateDf, state):
     row=stateDf.loc[stateDf["state"]==state,"region"]
-    # print(stateDf)
+    # print(stateDf["state"])
     return row.values[0]
 
 
@@ -177,6 +177,7 @@ def addSentimentColumn(data):
         message=data["text"].loc[index]
         text=findSentiment(classifier, message)
         sentiments.append(text)
+        # print(data["text"])
     data["sentiment"]=sentiments
     return
 
@@ -188,6 +189,7 @@ Parameters: dataframe ; str ; str
 Returns: dict mapping strs to ints
 '''
 def getDataCountByState(data, colName, dataToCount):
+    # print(data)
     dictionary={}
     for i, row in data.iterrows():
         if ((len(colName)==0) and (len(dataToCount)==0) or (row[colName]==dataToCount)):
@@ -196,6 +198,7 @@ def getDataCountByState(data, colName, dataToCount):
                     dictionary[state] = 1
                 else :
                     dictionary[state] += 1
+        print(dataToCount)
     return dictionary
 # df = makeDataFrame("data/politicaldata.csv")
 # stateDf = makeDataFrame("data/statemappings.csv")
@@ -254,6 +257,7 @@ def mostCommonHashtags(hashtags, count):
         if Total<count:
             x[r]= hashtags[r]
             Total=Total+1
+        # print(count)
     return (x)
 
 
@@ -273,6 +277,7 @@ def getHashtagSentiment(data, hashtag):
                 x.append(-1)
             elif row['sentiment']=='neutral':
                 x.append(0)
+            # print(row['text'])
     return sum(x)/len(x)
 
 
@@ -312,7 +317,7 @@ def graphTopNStates(stateCounts, stateFeatureCounts, n, title):
     for i in stateFeatureCounts:
         featurerate[i]=(stateFeatureCounts[i]/stateCounts[i])
     topstates=dict(Counter(featurerate).most_common(n))
-    graphStateCounts(topstates,"Top n Featured")
+    graphStateCounts(topstates,title)
     return
 
 
@@ -336,7 +341,6 @@ def graphRegionComparison(regionDicts, title):
         regionvalue.append(templist)
         regionlist.append(i)
     sideBySideBarPlots(featurelist,regionlist,regionvalue,title)
-
     return
 
 
@@ -347,6 +351,16 @@ Parameters: dataframe
 Returns: None
 '''
 def graphHashtagSentimentByFrequency(data):
+    dictionary1=getHashtagRates(data)
+    mostcommon=mostCommonHashtags(dictionary1,50)
+    hashtaglist=[]
+    frequencylist=[]
+    sentimentlist=[]
+    for i in mostcommon:
+        hashtaglist.append(i)
+        frequencylist.append(mostcommon[i])
+        sentimentlist.append(getHashtagSentiment(data,i))
+    scatterPlot(frequencylist,sentimentlist,hashtaglist,"Hashtags Frequency")
     return
 
 
@@ -411,8 +425,9 @@ if __name__ == "__main__":
     # test.week1Tests()
     # print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
     # test.runWeek1()
-    
-    # test.testGetDataForRegion(df)
+    # test.testAddColumns()
+    # test.testAddSentimentColumn()
+    # test.testGetDataCountByState(df)
     # test.testGetHashtagRates(df)
     # test.testMostCommonHashtags(df)
     # test.testGetHashtagSentiment(df)
@@ -420,6 +435,8 @@ if __name__ == "__main__":
     # stateDf = makeDataFrame("data/statemappings.csv")
     # addColumns(df, stateDf)
     # addSentimentColumn(df)
+    # test.testMostCommonHashtags(df)
+    # test.testGetHashtagSentiment(df)
     # test.testGetDataCountByState(df)
     ## Uncomment these for Week 2 ##
     # print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
