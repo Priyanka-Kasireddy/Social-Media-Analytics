@@ -244,7 +244,14 @@ Parameters: dict mapping strs to ints ; int
 Returns: dict mapping strs to ints
 '''
 def mostCommonHashtags(hashtags, count):
-    return
+    x={}
+    Total=0
+    x_dict = sorted(hashtags, key=hashtags.get, reverse=True)
+    for r in x_dict:
+        if Total<count:
+            x[r]= hashtags[r]
+            Total=Total+1
+    return (x)
 
 
 '''
@@ -254,7 +261,16 @@ Parameters: dataframe ; str
 Returns: float
 '''
 def getHashtagSentiment(data, hashtag):
-    return
+    x=[]
+    for index, row in data.iterrows():
+        if hashtag in row['text']:
+            if row['sentiment']=='positive':
+                x.append(1)
+            elif row['sentiment']=='negative':
+                x.append(-1)
+            elif row['sentiment']=='neutral':
+                x.append(0)
+    return sum(x)/len(x)
 
 
 ### PART 3 ###
@@ -363,9 +379,10 @@ if __name__ == "__main__":
     # test.runWeek1()
     # test.testGetDataCountByState()
     # test.testGetDataForRegion(df)
-    test.testGetHashtagRates(df)
-
-
+    # test.testGetHashtagRates(df)
+    # test.testMostCommonHashtags(df)
+    test.testGetHashtagSentiment(df)
+    
     ## Uncomment these for Week 2 ##
     # """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
     # test.week2Tests()
