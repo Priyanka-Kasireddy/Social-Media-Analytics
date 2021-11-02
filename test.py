@@ -63,29 +63,29 @@
     # return lst
 # print(findHashtags(message))
 
-def addColumns(data, stateDf):
-    names=[]
-    positions=[]
-    states=[]
-    regions=[]
-    hashtags=[]
-    for index, row in data.iterrows():
-        labelvalue=data["label"].loc[index] 
-        pN=parseName(labelvalue) 
-        pP=parsePosition(labelvalue) 
-        pS=parseState(labelvalue) 
-        RFS=getRegionFromState(stateDf,state) 
-        textvalue=data["text"].loc[index] 
-        Htag=findHashtags(textvalue) 
-        names.append(pN) 
-        positions.append(pP) 
-        states.append(pS) 
-        regions.append(RFS) 
-        hashtags.append(Htag) 
-        data["pN"]=names 
-        data["pP"]=positions 
-        data["pS"]=states 
-        data["RFS"]=regions 
-        data["Htags"]=hashtags 
-    return None
+# def addColumns(data, stateDf):
+#     names=[]
+#     positions=[]
+#     states=[]
+#     regions=[]
+#     hashtags=[]
+#     for index, row in data.iterrows():
+#         labelvalue=data["label"].loc[index] 
+#         pN=parseName(labelvalue) 
+#         pP=parsePosition(labelvalue) 
+#         pS=parseState(labelvalue) 
+#         RFS=getRegionFromState(stateDf,state) 
+#         textvalue=data["text"].loc[index] 
+#         Htag=findHashtags(textvalue) 
+#         names.append(pN) 
+#         positions.append(pP) 
+#         states.append(pS) 
+#         regions.append(RFS) 
+#         hashtags.append(Htag) 
+#         data["pN"]=names 
+#         data["pP"]=positions 
+#         data["pS"]=states 
+#         data["RFS"]=regions 
+#         data["Htags"]=hashtags 
+#     return None
 
