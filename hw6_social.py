@@ -301,8 +301,6 @@ if __name__ == "__main__":
     # test.testMakeDataFrame()
     # test.testParseName()
     # test.testParsePosition()
-    # test.testParseState()
-    test.testFindHashtags()
 
     ## Uncomment these for Week 2 ##
     """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
