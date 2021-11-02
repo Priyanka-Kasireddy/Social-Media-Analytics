@@ -312,7 +312,7 @@ def graphTopNStates(stateCounts, stateFeatureCounts, n, title):
     for i in stateFeatureCounts:
         featurerate[i]=(stateFeatureCounts[i]/stateCounts[i])
     topstates=dict(Counter(featurerate).most_common(n))
-    graphStateCounts(topstates,title)
+    graphStateCounts(topstates,"Top n Featured")
     return
 
 
@@ -323,6 +323,20 @@ Parameters: dict mapping strs to (dicts mapping strs to ints) ; str
 Returns: None
 '''
 def graphRegionComparison(regionDicts, title):
+    featurelist=[]
+    regionlist=[]
+    regionvalue=[]
+    for i in regionDicts:
+        templist=[]
+        x=regionDicts[i]
+        for j in x:
+            if j not in featurelist:
+                featurelist.append(j)
+            templist.append(x[j])
+        regionvalue.append(templist)
+        regionlist.append(i)
+    sideBySideBarPlots(featurelist,regionlist,regionvalue,title)
+
     return
 
 
