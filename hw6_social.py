@@ -5,6 +5,7 @@ Roll Number:
 """
 
 import hw6_social_tests as test
+from typing import Counter
 
 project = "Social" # don't edit this
 
@@ -192,8 +193,9 @@ def getDataCountByState(data, colName, dataToCount):
         if ((len(colName)==0) and (len(dataToCount)==0) or (row[colName]==dataToCount)):
                 state=row["state"]
                 if state not in dictionary:
-                    dictionary[state] = 0
-                dictionary[state] += 1
+                    dictionary[state] = 1
+                else :
+                    dictionary[state] += 1
     return dictionary
 # df = makeDataFrame("data/politicaldata.csv")
 # stateDf = makeDataFrame("data/statemappings.csv")
@@ -215,8 +217,9 @@ def getDataForRegion(data, colName):
         if  region  in dict:
             attack=row[colName]
             if attack not in dict[region]:
-                dict[region][attack] = 0
-            dict[region][attack] += 1
+                dict[region][attack] = 1
+            else :
+                dict[region][attack] += 1
     return dict
 
 
@@ -289,7 +292,7 @@ def graphStateCounts(stateCounts, title):
     for index in range(len(ylist)):
         plt.bar(xlist[index],ylist[index],width=w)
     plt.xticks(ticks=list(range(len(xlist))),label=xlist,rotation="vertical")
-    plt.title("StateCount")
+    plt.title(title)
     plt.xlabel("State")
     plt.ylabel("Count")
  
@@ -304,6 +307,12 @@ Parameters: dict mapping strs to ints ; dict mapping strs to ints ; int ; str
 Returns: None
 '''
 def graphTopNStates(stateCounts, stateFeatureCounts, n, title):
+    featurerate={}
+    topstates={}
+    for i in stateFeatureCounts:
+        featurerate[i]=(stateFeatureCounts[i]/stateCounts[i])
+    topstates=dict(Counter(featurerate).most_common(n))
+    graphStateCounts(topstates,title)
     return
 
 
@@ -388,16 +397,16 @@ if __name__ == "__main__":
     # test.week1Tests()
     # print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
     # test.runWeek1()
-    # test.testGetDataCountByState()
+    
     # test.testGetDataForRegion(df)
     # test.testGetHashtagRates(df)
     # test.testMostCommonHashtags(df)
     # test.testGetHashtagSentiment(df)
-    df = makeDataFrame("data/politicaldata.csv")
-    stateDf = makeDataFrame("data/statemappings.csv")
-    addColumns(df, stateDf)
-    addSentimentColumn(df)
-    
+    # df = makeDataFrame("data/politicaldata.csv")
+    # stateDf = makeDataFrame("data/statemappings.csv")
+    # addColumns(df, stateDf)
+    # addSentimentColumn(df)
+    # test.testGetDataCountByState(df)
     ## Uncomment these for Week 2 ##
     # print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
     # test.week2Tests()
