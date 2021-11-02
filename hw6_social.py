@@ -207,7 +207,17 @@ Parameters: dataframe ; str
 Returns: dict mapping strs to (dicts mapping strs to ints)
 '''
 def getDataForRegion(data, colName):
-    return
+    dict={}
+    for i, row in data.iterrows():
+        region=row["region"]
+        if region not in dict:
+            dict[region] = {}
+        if  region  in dict:
+            attack=row[colName]
+            if attack not in dict[region]:
+                dict[region][attack] = 0
+            dict[region][attack] += 1
+    return dict
 
 
 '''
@@ -344,7 +354,8 @@ if __name__ == "__main__":
     # test.week1Tests()
     # print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
     # test.runWeek1()
-    test.testGetDataCountByState(df)
+    # test.testGetDataCountByState()
+    test.testGetDataForRegion(df)
 
     ## Uncomment these for Week 2 ##
     # """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
