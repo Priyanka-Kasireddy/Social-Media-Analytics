@@ -1,5 +1,4 @@
 
-
 """
 Social Media Analytics Project
 Name:
@@ -110,6 +109,7 @@ Returns: str
 '''
 def getRegionFromState(stateDf, state):
     row=stateDf.loc[stateDf["state"]==state,"region"]
+    print(stateDf)
     return row.values[0]
 
 
@@ -143,8 +143,7 @@ def addColumns(data, stateDf):
     data["state"]=states 
     data["region"]=regions 
     data["hashtags"]=hashtags 
-    return None 
-     
+    return None  
 
 
 ### PART 2 ###
@@ -157,7 +156,12 @@ Returns: str
 '''
 def findSentiment(classifier, message):
     score = classifier.polarity_scores(message)['compound']
-    return
+    if score<-0.1:
+        return "negative"
+    elif score>0.1:
+        return "positive"
+    else :
+        return "neutral"
 
 
 '''
@@ -325,8 +329,7 @@ if __name__ == "__main__":
     # test.week1Tests()
     # print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
     # test.runWeek1()
-    # test.testGetRegionFromState()
-    test.testAddColumns()
+    test.testFindSentiment()
 
     ## Uncomment these for Week 2 ##
     # """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
